@@ -1,6 +1,26 @@
 const express = require('express');
 const {ProductsController} = require('./controller');
 const router = express.Router();
+const cors = require('cors');
+
+app.use(cors());
+
+/// configuro las url que pueden usar mis datos
+let whileList = ['http://localhost:3000/', 'http://localhost:3000/Productos'];
+
+let corsOptions = {
+    origin: (origin, callback) => {
+        if(whileList.indexOf(origin) != -1) { // si el origen esta
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}
+
+app.get('/', cors(corsOptions), (req, res) => {
+    res = ProductsController.getProducts;
+})
 
 module.exports.ProductsAPI = (app) => {
     router
