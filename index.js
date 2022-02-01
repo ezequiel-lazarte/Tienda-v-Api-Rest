@@ -8,6 +8,15 @@ const {IndexAPI, NotFoundAPI} = require('./src/index/index');
 
 const app = express();
 
+const cors=require("cors");
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+
 app.use(express.json()); // con esto le damos la capacidad de que el cliente nos envie un body en el req
 
 /// Modulos
